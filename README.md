@@ -1,24 +1,6 @@
-# vuesearch
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# GoSearch前端
+## 主界面
+![](2022-05-27-16-03-13.png)
+## TODO
+1. 响应界面
+2. 点击搜索结果进行的代理跳转功能
