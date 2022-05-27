@@ -67,6 +67,7 @@
     background-color:#39F;
     border-width: 1px;
     border-style: solid;
+    font-size:24px;
     color:#FFF;
     margin:-2px 0 0 -5px;
     padding: 0px;
