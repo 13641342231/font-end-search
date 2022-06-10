@@ -1,18 +1,4 @@
 import axios from "axios"
-import _ from "lodash"
-    
-// 处理请求参数
-// const coverFormData = (obj) => {
-//      let data = Object.keys(obj.data).map(item => {
-//          let value = obj.data[item];
-//          if(_.isArray(value) || _.isObject(value)){
-//              value = JSON.stringify(value)
-//          }
-//          return encodeURIComponent(item) + '=' + encodeURIComponent(value);
-//      }).join('&');
-    
-//      return {data: data, url: obj.url};
-// }
     
 function post(url,data) {
     const headerJSON = {

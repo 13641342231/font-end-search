@@ -1,12 +1,8 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <SearchEngine></SearchEngine>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import SearchEngine from './components/SearchEngineOld.vue'
 import SearchEngine from './components/SearchEngine.vue'
 
 export default {

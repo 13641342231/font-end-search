@@ -1,27 +1,22 @@
 <template>
-    <!-- 组件的结构 -->
-    <div class="">
+    <div>
         <h2>{{Msg}}</h2>
     </div>
     <div class="engine">
         <p >
             <input type="text" v-model="Query">
-            <button id="button" v-on:click="search">搜索一下</button>
-        </p>
-        
-        <p>
-            <input type="checkbox" v-model = 'NeedBlock'>需要结果过滤
-            <input type="text" v-model="Block">
+            <button v-on:click="search">搜索一下</button>
         </p>
     </div>
-    <div class="serachres">
-        <a href="http://">这是一个搜索连接</a>
+    <div v-for="result in results" v-bind:key="result.order">
+        <a href={{result.url}}>{{result.caption}}</a> 
+    </div>
 
-        <!-- <span></span> -->
-    </div>
 </template>
 
 <script>
+    import requests from "../assets/requests"
+    // import axios from "axios"
     // 组件交互、数据处理等功能
     export default{
         name:'SearchEngine',
@@ -29,16 +24,23 @@
             return{
                 Msg:"Welcome to go-search!",
                 Query:'',
-                NeedBlock:'',
-                Block:'',
+                results:[
+                {order:"1",url:"baidu.com",caption:"搜索结果一"},
+                {order:"2",url:"bilibili.com",caption:"搜索结果二"},
+                {order:"3",url:"bytedance.com",caption:"搜索结果三"}
+                ]
             }
         },
         methods:{
             search(){
-                alert("Search test")
-                console.log(this.Query)
-                console.log(this.Block)
-                window.open('https://localhost:8080/query?query='+this.Query+'&block='+this.Block)
+             requests.post("http://127.0.0.1:5678/api/query?database=default", {
+                    query:this.Query
+                }
+             ).then(res =>{
+                 console.log(res)
+             }).catch(error=>{
+                 console.log(error)
+             })
             }
             
         }
@@ -58,18 +60,7 @@
         font-size:24px;
     }
     .serachres{
-
-    }
-    #button{
-    /* float: right; */
-    height:'';
-    width:10%;
-    background-color:#39F;
-    border-width: 1px;
-    border-style: solid;
-    font-size:24px;
-    color:#FFF;
-    margin:-2px 0 0 -5px;
-    padding: 0px;
+        font-size: 20;
+        text-align: left;
     }
 </style>
