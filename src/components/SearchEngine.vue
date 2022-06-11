@@ -5,8 +5,8 @@
     <div class="engine">
         <p >
             <input type="text" v-model="Query">
-            <input type="text" v-model="Page">
-            <input type="text" v-model="Limit">
+            <input type="number" v-model="Page">
+            <input type="number" v-model="Limit">
             <button v-on:click="search">搜索一下</button>
         </p>
     </div>
