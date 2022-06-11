@@ -10,9 +10,10 @@
             <button v-on:click="search">搜索一下</button>
         </p>
     </div>
-    <div v-for="result in results.data.documents " v-bind:key="result.score">
+    <div v-for="result in sortResults" :key="result">
         <a href={{result.url}}>{{result.text}}</a>
     </div>
+
 
 </template>
 
@@ -54,9 +55,15 @@
                 }
             }
         },
+      computed:{
+        sortResults:function(){
+          return this.sortByKey(this.results.data.documents,'score','id');
+          //this.modules是原数组
+        }
+      },
         methods:{
             search(){
-             requests.post("http://192.168.0.101:5678/api/query?database=default", {
+             requests.post("http://192.168.1.167:5678/api/query?database=default", {
                     query:this.Query,
                limit:this.Limit,
                page:this.Page
@@ -66,13 +73,27 @@
                 this.results=res
                console.log(this.results.data.documents)
                // console.log(this.results)
-
              }).catch(error=>{
                  console.log(error)
              })
-            }
-            
-        }
+            },
+
+            //直接拷贝这个方法
+            sortByKey(array, score, id) {
+              return array.sort(function(a, b) {
+                var x = a[score];
+                var y = b[score];
+                if(x != y){
+                  return x < y ? 1 : x > y ? -1 : 0;
+                }else{
+                  x = a[id];
+                  y = b[id];
+                  return x < y ? -1 : x > y ? 1 : 0;
+                }
+              });
+            },
+          }
+
     }
 </script>
 
