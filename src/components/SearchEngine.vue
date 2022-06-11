@@ -11,7 +11,7 @@
         </p>
     </div>
     <div v-for="result in sortResults" :key="result">
-        <a href={{result.url}}>{{result.text}}</a>
+        <a :href="result.url">{{result.text}}</a>
     </div>
 
 
