@@ -11,7 +11,7 @@
         </p>
     </div>
     <div v-for="result in sortResults" :key="result">
-        <a :href="result.url">{{result.text}}</a>
+        <a :href="result.url" v-html="result.text"></a>
     </div>
 
 
@@ -63,15 +63,20 @@
       },
         methods:{
             search(){
-             requests.post("http://192.168.1.167:5678/api/query?database=default", {
+                // "http://192.168.1.167:5678/api/query?database=default"
+             requests.post("http://127.0.0.1:5678/api/query?database=default", {
                     query:this.Query,
-               limit:this.Limit,
-               page:this.Page
+                    limit:this.Limit,
+                    page:this.Page,
+                    highlight:{
+                        preTag:"<mark>",
+                        postTag:"</mark>",
+                    }
                 }
              ).then(res =>{
-                 // console.log(res)
+                 console.log(res.data.documents)
                 this.results=res
-               console.log(this.results.data.documents)
+            //    console.log(this.results.data.documents)
                // console.log(this.results)
              }).catch(error=>{
                  console.log(error)
