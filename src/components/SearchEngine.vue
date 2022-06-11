@@ -5,14 +5,13 @@
     <div class="engine">
         <p >
             <input type="text" v-model="Query">
-            <input type="text" v-model="Page">
-            <input type="text" v-model="Limit">
+            <input type="number" v-model="Page">
+            <input type="number" v-model="Limit">
             <button v-on:click="search">搜索一下</button>
         </p>
     </div>
     <div v-for="result in results.data.documents " v-bind:key="result.score">
         <a href={{result.url}}>{{result.text}}</a>
-<!--      <div>{{results}}</div>-->
     </div>
 
 </template>
@@ -29,7 +28,6 @@
                 Query:'中国',
               Page:1,
               Limit:10,
-                // results:''
                 results:{
                   "state": true,
                   "message": "success",
@@ -54,7 +52,6 @@
                     ]
                   }
                 }
-                // results:{order:"1",url:"http://www.baidu.com",caption:"搜索结果一"}
             }
         },
         methods:{
