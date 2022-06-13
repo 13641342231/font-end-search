@@ -14,6 +14,15 @@
         <a :href="result.url" v-html="result.text"></a>
     </div>
 
+    <div class="relatedsearch">
+        <h3>相关搜索</h3>
+        <div v-for="result in relatedsearchResults.slice(0, 10)" :key="result">
+            <a v-on:click ="newsearch(result)" value="{{result}}"> {{result}}</a>
+    </div>
+    </div>
+
+
+
 
 </template>
 
@@ -50,7 +59,8 @@
                     ],
                     "words": [
                       "2002"
-                    ]
+                    ],
+                    "relatedsearch": ["中国国旗","中国旅游景点"]
                   }
                 }
             }
@@ -59,9 +69,13 @@
         sortResults:function(){
           return this.sortByKey(this.results.data.documents,'score','id');
           //this.modules是原数组
+        },
+        relatedsearchResults:function(){
+          return this.results.data.relatedsearch;
         }
       },
         methods:{
+          
             search(){
                 // "http://192.168.1.167:5678/api/query?database=default"
              requests.post("http://127.0.0.1:5678/api/query?database=default", {
@@ -97,10 +111,36 @@
                 }
               });
             },
-          }
+            newsearch(result){
+              // console.log(result)
+              this.Query = result
+                // "http://192.168.1.167:5678/api/query?database=default"
+             requests.post("http://127.0.0.1:5678/api/query?database=default", {
+                    query:this.Query,
+                    limit:this.Limit,
+                    page:this.Page,
+                    highlight:{
+                        preTag:"<mark>",
+                        postTag:"</mark>",
+                    }
+                }
+             ).then(res =>{
+                 console.log(res.data.documents)
+                this.results=res
+            //    console.log(this.results.data.documents)
+               // console.log(this.results)
+             }).catch(error=>{
+                 console.log(error)
+             })
+            
 
+            }
+          },
     }
+
+
 </script>
+
 
 <style>
     /* 组件样式 */
@@ -117,5 +157,9 @@
     .serachres{
         font-size: 20px;
         text-align: left;
+    }
+    .relatedsearch{
+        color:aliceblue;
+
     }
 </style>
