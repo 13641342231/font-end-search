@@ -4,26 +4,28 @@
     </div>
     <div class="engine">
         <p >
-            <input type="text" v-model="Query">
-            <input type="number" v-model="Page">
-            <input type="number" v-model="Limit">
+            <input type="text" v-model="Query" style="width: 600px;height: 20px;font-size: medium;margin: auto;">
             <button v-on:click="search">搜索一下</button>
         </p>
     </div>
-    <div v-for="result in sortResults" :key="result">
-        <a :href="result.url" v-html="result.text"></a>
-    </div>
-
-    <div class="relatedsearch">
+    <div class="searchRes" >
+        <div v-for="result in sortResults" :key="result">
+            <a :href="result.url" v-html="result.text"></a>
+        </div>
+        <div class="relatedsearch">
         <h3>相关搜索</h3>
         <div v-for="result in relatedsearchResults.slice(0, 10)" :key="result">
             <a v-on:click ="newsearch(result)" value="{{result}}"> {{result}}</a>
+        </div>
     </div>
     </div>
 
 
 
-
+    <p>
+        页数<input class="page" min="1" type="number" v-model="Page">
+        最大显示数量<input class="page" max="100" type="number" v-model="Limit">
+    </p>
 </template>
 
 <script>
@@ -154,12 +156,24 @@
         background-color: transparent;
         font-size:24px;
     }
-    .serachres{
-        font-size: 20px;
-        text-align: left;
+    .searchRes{
+        font-size: 16px;
+        text-align: center;
+        height: 500px;
+    }
+    .page{
+        text-align: center;
+        position: relative;
+        width: 30px;
+        height: 10px;
+        
     }
     .relatedsearch{
         color:aliceblue;
+        text-align: center;
+        /* position: relative; */
+        /* width: 300px; */
+        /* height: 200px; */
 
     }
 </style>

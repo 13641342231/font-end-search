@@ -22,7 +22,9 @@ html {
 body {
   height: 100%;
   background: url('~@/assets/background.png') no-repeat;
-  background-size: 100% 100%
+  background-size: 100% 100%;
+  /* margin: 0; */
+  /* padding: 0; */
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
